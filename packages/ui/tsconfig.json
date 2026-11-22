@@ -1,0 +1,5 @@
+{
+  "extends": "@veritas/config/tsconfig.next.json",
+  "compilerOptions": { "plugins": [] },
+  "include": ["src"]
+}
