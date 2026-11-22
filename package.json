@@ -13,9 +13,9 @@
     "test": "turbo run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:generate": "pnpm --filter @veritas/db db:generate",
-    "db:migrate": "pnpm --filter @veritas/db db:migrate",
-    "seed:admin": "pnpm --filter @veritas/web seed:admin"
+    "db:generate": "pnpm --filter @veritas/backend db:generate",
+    "db:migrate": "pnpm --filter @veritas/backend db:migrate",
+    "seed:admin": "pnpm --filter @veritas/backend seed:admin"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",

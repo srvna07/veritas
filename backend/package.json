@@ -1,0 +1,37 @@
+{
+  "name": "@veritas/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./db": "./src/db/index.ts",
+    "./security": "./src/security/index.ts",
+    "./mail": "./src/mail/index.ts",
+    "./env": "./src/config/env.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file-if-exists=../frontend/.env.local src/db/migrate.ts",
+    "seed:admin": "tsx --env-file-if-exists=../frontend/.env.local scripts/seed-admin.ts"
+  },
+  "dependencies": {
+    "@veritas/schemas": "workspace:*",
+    "drizzle-orm": "^0.45.4",
+    "nodemailer": "^8.0.5",
+    "postgres": "^4.1.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/nodemailer": "^8.0.2",
+    "@veritas/config": "workspace:*",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "catalog:",
+    "tsx": "^4.23.15",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

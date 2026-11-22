@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
-// Base config for packages. apps/web has its own config that layers the Next.js preset on top.
+// Base config for packages. frontend/ has its own config that layers the Next.js preset on top.
 export default defineConfig([
   globalIgnores([
     '**/node_modules/**',

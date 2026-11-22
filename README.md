@@ -23,7 +23,7 @@ Requirements: Node 22+, pnpm 10, Docker (for Postgres).
 ```bash
 pnpm install
 docker compose up -d                     # Postgres on :5432
-cp .env.example apps/web/.env.local      # then fill in AUTH_SECRET and the SEED_ADMIN_* values
+cp .env.example frontend/.env.local      # then fill in AUTH_SECRET and the SEED_ADMIN_* values
 pnpm db:migrate                          # create tables
 pnpm seed:admin                          # create the first admin (SEED_ADMIN_EMAIL / PASSWORD)
 pnpm dev                                 # http://localhost:3000
@@ -35,7 +35,7 @@ Generate `AUTH_SECRET` with `openssl rand -base64 32`.
 
 1. Turn on 2-Step Verification for the Google account.
 2. Create an **App Password** (Google Account > Security > App passwords).
-3. In `apps/web/.env.local` set `SMTP_USER` (your Gmail address), `SMTP_PASS` (the app password) and `MAIL_FROM`.
+3. In `frontend/.env.local` set `SMTP_USER` (your Gmail address), `SMTP_PASS` (the app password) and `MAIL_FROM`.
 
 If `SMTP_USER`/`SMTP_PASS` are empty, then in development the reset link is printed in the server console instead of being emailed. In production the app refuses to start sending without them.
 
@@ -53,9 +53,11 @@ If `SMTP_USER`/`SMTP_PASS` are empty, then in development the reset link is prin
 ## Layout
 
 ```
-apps/web          Next.js UI (auth pages, dashboard, admin users page)
-packages/schemas  Zod schemas + role/permission definitions
-packages/db       Drizzle schema, migrations, queries
-packages/ui       MUI theme and ThemeRegistry
-packages/config   shared tsconfig presets
+frontend/         Everything the user sees: Next.js pages, components, MUI theme, server actions, route proxy
+backend/          Everything server-side: database, security (passwords/tokens/rate limits), email, env
+packages/schemas  Shared by both: Zod schemas, roles/permissions, route-access rules
+packages/config   Shared tsconfig presets
 ```
+
+The frontend calls the backend through its server actions (`frontend/src/app/actions`). Same Next.js
+server, no separate API process. The backend is imported as `@veritas/backend/db`, `/security`, `/mail`, `/env`.

@@ -1,7 +1,7 @@
 packages:
-  - apps/*
+  - frontend
+  - backend
   - packages/*
-  - packages/modules/*
 
 # One version of each shared dependency across the monorepo.
 catalog:
